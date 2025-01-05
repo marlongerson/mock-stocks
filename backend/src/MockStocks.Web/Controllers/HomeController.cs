@@ -12,7 +12,9 @@ public sealed class HomeController : ControllerBase
     /// <summary>
     /// Handles the HTTP request for the index.
     /// </summary>
-    /// <returns></returns>
+    /// <returns>
+    /// An <see cref="IActionResult"/> representing the result of the action method.
+    /// </returns>
     [HttpGet]
     public Task<IActionResult> Index()
     {
