@@ -58,7 +58,9 @@ function App() {
       <div className="px-8 p-2 border-b border-gray-200 bg-gray-100">
         <div className="flex justify-between items-center">
           <h1 className="font-bold text-xl">MockStocks</h1>
-          <FontAwesomeIcon className="text-4xl" icon={faGithub}/>
+          <a href="https://github.com/marlongerson/mock-stocks">
+            <FontAwesomeIcon className="text-4xl" icon={faGithub}/>
+          </a>
         </div>
       </div>
       <div className="px-8 py-4">
