@@ -19,11 +19,14 @@ public class Program
     public static void Main(string[] args)
     {
         var builder = WebApplication.CreateBuilder(args);
+        builder.Services.AddCors();
         builder.Services.AddControllers();
         builder.Services.AddSingleton<IPriceHistoryCache, InMemoryPriceHistoryCache>(
             _ => new InMemoryPriceHistoryCache(int.Parse(builder.Configuration["LRUCache:Capacity"] ?? DefaultLRUCacheCapacity.ToString())));
         
         var app = builder.Build();
+        app.UseHttpsRedirection();
+        app.UseCors(options => options.WithOrigins("https://mock-stocks.vercel.app"));
         app.MapControllers();
         app.Run();
     }
