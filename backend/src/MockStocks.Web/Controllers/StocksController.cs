@@ -33,7 +33,7 @@ public sealed class StocksController : ControllerBase
     /// <returns>
     /// The price history of the stock.
     /// </returns>
-    [HttpGet("{symbol:alpha:maxlength(4)}")]
+    [HttpGet("{symbol:alpha}")]
     public Task<IActionResult> GetPriceHistory([FromRoute] string symbol)
     {
         symbol = symbol.ToLower();
