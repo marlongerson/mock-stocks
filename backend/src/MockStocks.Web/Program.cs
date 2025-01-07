@@ -25,8 +25,7 @@ public class Program
             _ => new InMemoryPriceHistoryCache(int.Parse(builder.Configuration["LRUCache:Capacity"] ?? DefaultLRUCacheCapacity.ToString())));
         
         var app = builder.Build();
-        app.UseHttpsRedirection();
-        app.UseCors(options => options.WithOrigins("https://mock-stocks.vercel.app"));
+        app.UseCors(options => options.WithOrigins(builder.Configuration["Cors"]!));
         app.MapControllers();
         app.Run();
     }
