@@ -55,16 +55,54 @@ function App() {
 
   return (
     <>
-      <div className="px-8 p-2 border-b border-gray-200 bg-gray-100">
-        <div className="flex justify-between items-center">
+      <div className="border-b border-gray-200 bg-gray-100 flex justify-center">
+        <div className="p-2 flex justify-between max-w-5xl w-full items-center">
           <h1 className="font-bold text-xl">MockStocks</h1>
           <a href="https://github.com/marlongerson/mock-stocks">
             <FontAwesomeIcon className="text-4xl" icon={faGithub}/>
           </a>
         </div>
       </div>
-      <div className="px-8 py-4">
-        <div className="px-8 py-4">
+      <div className="flex justify-center">
+        <div className="p-2 max-w-5xl w-full text-center">
+          <div style={{maxWidth: '1000px'}}>
+            <Line
+              options={
+                {
+                  plugins: {
+                    title: {
+                      display: true,
+                      text: "History"
+                    }
+                  },
+                  scales: {
+                    x: {
+                      title: {
+                        display: true,
+                        text: 'Date'
+                      }
+                    },
+                    y: {
+                      title: {
+                        display: true,
+                        text: 'Price'
+                      }
+                    }
+                  }
+                }
+              }
+              datasetIdKey='0'
+              data={{
+                labels: generateDates(history.length),
+                datasets: [
+                  {
+                    label: label.length == 0 ? 'No symbol selected' : `$${label.toUpperCase()}`,
+                    data: history,
+                  },
+                ],
+              }}
+            />
+          </div>
           <div>
             <input
               type="text"
@@ -73,6 +111,7 @@ function App() {
               value={symbol}
               onKeyDown={e => onInputKeyDown(e)}
               onChange={e => setSymbol(e.target.value)}
+              disabled={loading}
             />
             <button
               className="px-4 py-2 bg-cyan-700 text-white rounded-r-sm w-20"
@@ -89,44 +128,6 @@ function App() {
               <></>
             )}
           </div>
-        </div>
-        <div style={{maxWidth: '1000px', height: '1000px'}}>
-          <Line
-            options={
-              {
-                plugins: {
-                  title: {
-                    display: true,
-                    text: "History"
-                  }
-                },
-                scales: {
-                  x: {
-                    title: {
-                      display: true,
-                      text: 'Date'
-                    }
-                  },
-                  y: {
-                    title: {
-                      display: true,
-                      text: 'Price'
-                    }
-                  }
-                }
-              }
-            }
-            datasetIdKey='0'
-            data={{
-              labels: generateDates(history.length),
-              datasets: [
-                {
-                  label: label.length == 0 ? 'No symbol selected' : `$${label.toUpperCase()}`,
-                  data: history,
-                },
-              ],
-            }}
-          />
         </div>
       </div>
     </>
